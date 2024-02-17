@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Price Prediction Web Page</title>
+    
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: black;
+            overflow: hidden;
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+        }
+        h2{
+            color:white;
+            font-size:20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #000;
+        }
+        
+        #index {
+            color: black;
+            text-align: center;
+            padding: 100px;
+            height:70vh;
+            background-image : url('https://res.cloudinary.com/dmr0nlka4/image/upload/v1706021650/camera_img_ufmolk.jpg');
+            background-size:cover;
+        }
+        
+        .heading{
+            font-size:35px;
+            font-weight:bold;
+            text-align:left;
+            width:450px;
+            line-height:50px;
+        }
+        
+        #findthePrice {
+            background-image: url('https://res.cloudinary.com/dmr0nlka4/image/upload/v1706022264/cam2_mvossa.jpg');
+            background-size: cover;
+            background-position: center;
+            color: black;
+            text-align:center;
+            padding: 100px;
+        }
+        
+        #form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Additional CSS for form elements */
+        form {
+            text-align: center; /* Center-align the form */
+        }
+        
+        label, input {
+            display: flex;
+            flex-direction:row;
+            margin-left:39%;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #1a4fed;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #1a4fed;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Camera Price Prediction</h2>
+        <a href="#index">Home</a>
+        <a href="#about">About</a>
+        <a href="#findthePrice">Find the Price</a>
+    </div>
+
+    <section id="index">
+        <h1 class="heading">Camera Price Prediction through Advanced Machine Learning Models</h1>
+    </section>
+
+    
+    
+    <section id="findthePrice">
+        <h1>Find the Camera Price</h1>
+
+        <div id="form-container">
+            <h2>Enter Donor Details:</h2>
+            <form id="cameraPrice-form" action="{{ url_for('predict')}}" method="post">
+                <label for="max_resolution">Max Resolution:</label>
+        <input type="text" id="max_resolution" name="max_resolution" required>
+
+        <label for="low_resolution">Low Resolution:</label>
+        <input type="text" id="low_resolution" name="low_resolution" required>
+
+        <label for="effective_pixels">Effective Pixels:</label>
+        <input type="text" id="effective_pixels" name="effective_pixels" required>
+
+        <label for="zoom_wide">Zoom Wide(W):</label>
+        <input type="text" id="zoom_wide" name="zoom_wide" required>
+
+        <label for="zoom_tele">Zoom Tele(T):</label>
+        <input type="text" id="zoom_tele" name="zoom_tele" required>
+
+        <label for="normal_focus_range">Normal Focus Range:</label>
+        <input type="text" id="normal_focus_range" name="normal_focus_range" required>
+
+        <label for="macro_focus_range">Macro Focus Range:</label>
+        <input type="text" id="macro_focus_range" name="macro_focus_range" required>
+
+        <label for="storage_included">Storage Included:</label>
+        <input type="text" id="storage_included" name="storage_included" required>
+
+        <label for="weight">Weight (inc. batteries):</label>
+        <input type="text" id="weight" name="weight" required>
+
+        <label for="dimensions">Dimensions:</label>
+        <input type="text" id="dimensions" name="dimensions" required>
+
+
+        <button type="button submit" onclick="predictPrice()">Predict</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+            
+        </div>
+    </section>
+
+    <script>
+        async function predictPrice() {
+            // Check if any input is empty
+            if (
+                document.getElementById("max_resolution").value === "" ||
+                document.getElementById("low_resolution").value === "" ||
+                document.getElementById("effective_pixels").value === "" ||
+                document.getElementById("zoom_wide").value === ""||
+                document.getElementById("zoom_tele").value === "" ||
+                document.getElementById("normal_focus_range").value === "" ||
+                document.getElementById("macro_focus_range").value === "" ||
+                document.getElementById("storage_included").value === "" ||
+                document.getElementById("weight").value === "" ||
+                document.getElementById("dimensions").value === ""
+            ) {
+                alert("Please fill in all fields.");
+                return;
+            }
+        }
+    
+        function clearForm() {
+            // Clear all input values
+            document.getElementById("max_resolution").value = "";
+            document.getElementById("low_resolution").value = "";
+            document.getElementById("effective_pixels").value = "";
+            document.getElementById("zoom_wide").value = "";
+            document.getElementById("zoom_tele").value = "";
+            document.getElementById("normal_focus_range").value = "";
+            document.getElementById("macro_focus_range").value = "";
+            document.getElementById("storage_included").value = "";
+            document.getElementById("weight").value = "";
+            document.getElementById("dimensions").value = "";
+    
+            // Clear the prediction result
+            document.getElementById("prediction-result").innerHTML = "";
+        }
+    </script>
+    
+    
+</body>
+</html>
